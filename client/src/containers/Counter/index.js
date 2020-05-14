@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Header, Button } from 'semantic-ui-react';
-
+import { connect } from 'react-redux';
+import { increment } from '../../actions/counter';
 
 
 class Counter extends Component {
@@ -13,7 +14,7 @@ class Counter extends Component {
             textAlign='center'
             content='Welcome to the Counter App'
           />
-          <Header as='h2' textAlign='center'>Counter: <span>0</span></Header>
+          <Header as='h2' textAlign='center'>Counter: <span>{this.props.counter}</span></Header>
           <Button.Group>
             <Button
               icon='minus circle'
@@ -25,6 +26,7 @@ class Counter extends Component {
               icon='plus circle'
               content='Increment'
               positive
+              onClick={ this.props.increment }
             />
           </Button.Group>
         </Grid.Column>
@@ -33,5 +35,13 @@ class Counter extends Component {
   }
 }
 
+// This takes a key which is what we want the states name to be as props
+// The value is what state we want to pull out from the store
 
-export default Counter;
+function mapStateToProps(state) {
+  return { counter: state.counter };
+};
+
+
+export default  connect(mapStateToProps, { increment })(Counter);
+
