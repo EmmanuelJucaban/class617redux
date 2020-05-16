@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 
 import Counter from '../Counter';
+import AllTodosList from '../AllTodosList';
 
 import Navbar from './../../components/Navbar';
 
@@ -13,10 +14,13 @@ class App extends Component {
         <Grid.Column style={{ maxWidth: 700 }}>
           <Navbar/>
           <Route exact path='/counter' component={Counter}/>
+          <Route exact path='/alltodos' component={AllTodosList}/>
         </Grid.Column>
       </Grid>
     );
   }
 }
+
+
 
 export default App;
