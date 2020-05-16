@@ -3,7 +3,7 @@ const { User, Todo } = require('../models/index');
 module.exports = {
   getAllUserEmails: async (req, res) => {
     try {
-      const userEmails = await User.find({}, 'email');
+      const userEmails = await User.findOne({ email: req.query.email }, 'email');
       return res.status(200).json(userEmails);
     } catch (e) {
       return res.status(403).json({ e });
