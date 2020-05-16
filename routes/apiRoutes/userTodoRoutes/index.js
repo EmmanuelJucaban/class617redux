@@ -11,9 +11,8 @@ const { requireAuth } = require('../../../middlewares/authMiddlewares');
 // /api/user/emails
 router.get('/emails', getAllUserEmails);
 
+
 // /api/user/todos
-
-
 router.route('/todos')
   .get(requireAuth, getUserTodos);
 // /api/user/emails
