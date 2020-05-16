@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Segment, Button } from 'semantic-ui-react';
 import { email, length, required } from 'redux-form-validators';
-
+import axios from 'axios';
 
 class SignUp extends Component {
 
@@ -36,7 +36,6 @@ class SignUp extends Component {
     );
   }
 
-
   render() {
     console.log("Inside of signup render", this.props);
     return (
@@ -69,4 +68,17 @@ class SignUp extends Component {
   }
 }
 
-export default reduxForm({ form: 'signup' })(SignUp);
+
+const asyncValidate = async formValues => {
+  try {
+    const { data } = await axios.get('/api/user/emails');
+    const foundEmail = data.some(user => user.email === formValues.email);
+    if (foundEmail) {
+      throw new Error();
+    }
+  } catch (e) {
+    throw { email: 'Email already exists, please sign up with a different email' };
+  }
+}
+
+export default reduxForm({ form: 'signup', asyncValidate, asyncChangeFields: [ 'email' ] })(SignUp);
