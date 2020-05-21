@@ -10,7 +10,7 @@ import axios from 'axios';
 import UserTodoListItems from './UserTodoListItems';
 
 
-import { getUserTodos } from '../../actions/todos';
+import { getUserTodos, updateTodoCompletedById } from '../../actions/todos';
 import { ADD_TODO_ERROR, ADD_TODO } from '../../actions/types';
 
 class UserTodoList extends Component {
@@ -79,7 +79,9 @@ class UserTodoList extends Component {
           </Segment>
         </Form>
         <List animated divided selection>
-          <UserTodoListItems todos={this.props.todos.slice(this.state.start, this.state.end)}/>
+          <UserTodoListItems
+            todos={this.props.todos.slice(this.state.start, this.state.end)}
+            handleUpdate={this.props.updateTodoCompletedById} />
         </List>
         {
           this.props.todos.length <= 9 ?
@@ -125,6 +127,6 @@ function mapStateToProps({ todos: { userTodos, getUserTodosServerError, getUserT
 
 export default compose(
   reduxForm({ form: 'addTodo' }),
-  connect(mapStateToProps, { getUserTodos })
+  connect(mapStateToProps, { getUserTodos, updateTodoCompletedById })
 )(UserTodoList);
 
