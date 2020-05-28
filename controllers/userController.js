@@ -8,6 +8,7 @@ module.exports = {
     }
     try {
       const newTodo = await new Todo({ text, user: req.user._id }).save();
+      // const newTodo = await Todo.create({ text, user: req.user._id });
       req.user.todos.push(newTodo);
       await req.user.save();
       return res.status(200).json(newTodo);

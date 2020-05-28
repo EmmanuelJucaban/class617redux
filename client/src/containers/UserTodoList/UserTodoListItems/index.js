@@ -19,7 +19,7 @@ export default (props) => {
               content='Mark Complete'
               size='small'
               onClick={ () => props.handleUpdate(_id, completed, text )}/>
-            <DeleteTodoModal text={text}/>
+            <DeleteTodoModal handleDelete={props.handleDelete} id={_id} text={text}/>
           </List.Content>
         </List.Item>
       );
