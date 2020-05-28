@@ -9,6 +9,8 @@ import axios from 'axios';
 
 import UserTodoListItems from './UserTodoListItems';
 
+import requireAuth from '../../hoc/requireAuth';
+
 
 import { getUserTodos, updateTodoCompletedById, deleteTodoById } from '../../actions/todos';
 
@@ -21,6 +23,7 @@ class UserTodoList extends Component {
     start: 0,
     end: 10
   }
+
 
   onSubmit = async (formValues, dispatch) => {
     try {
@@ -62,6 +65,7 @@ class UserTodoList extends Component {
 
   render() {
     const { handleSubmit } = this.props;
+    console.log(this.props);
     return (
       <>
         <Header as='h2' color='teal' textAlign='center' content='Welcome to do the todo app'/>
@@ -130,6 +134,8 @@ function mapStateToProps({ todos: { userTodos, getUserTodosServerError, getUserT
 
 export default compose(
   reduxForm({ form: 'addTodo' }),
+  requireAuth,
   connect(mapStateToProps, { getUserTodos, updateTodoCompletedById, deleteTodoById })
 )(UserTodoList);
+
 

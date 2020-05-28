@@ -12,6 +12,7 @@ import SignIn from '../SignIn';
 
 
 import { connect } from 'react-redux';
+
 import Navbar from './../../components/Navbar';
 
 class App extends Component {
